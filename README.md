@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# College Notes 📚
 
-## Getting Started
+Collection of notes from my B.Tech in Mechatronics Engineering.
 
-First, run the development server:
+## Semester 7
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Robotics System Design** - Robot kinematics and control systems
+- **Industrial Robotics Motion Control** - Industrial automation and motion planning
+- **Mechatronics System Design** - Integrated mechatronic systems
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Semester 6
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **AI & ML** - Artificial Intelligence and Machine Learning
+- **Modern Control Systems** - Advanced control theory
+- **Graph Theory** - Mathematical foundations and applications
+- **PLC** - Programmable Logic Controllers
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Semester 5
 
-## Learn More
+- **Design of Machine Elements** - Mechanical design principles
+- **Dynamic System Modelling** - System dynamics and modeling
+- **Signals and Systems** - Signal processing fundamentals
+- **Rough Notes** - Miscellaneous class notes
 
-To learn more about Next.js, take a look at the following resources:
+All notes are in PDF format and can be filtered by semester or subject category.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[View Notes](https://dan10ish.github.io/college) • [My Website](https://danish.bio)

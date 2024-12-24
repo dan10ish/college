@@ -1,95 +1,85 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
+import { useState } from "react";
+import { notes } from "@/lib/notes-data";
+import FilterComponent from "@/components/FilterComponent";
+import Footer from "@/components/Footer";
+
+const shouldUseWhiteText = (hexColor) => {
+  const r = parseInt(hexColor.slice(1, 3), 16);
+  const g = parseInt(hexColor.slice(3, 5), 16);
+  const b = parseInt(hexColor.slice(5, 7), 16);
+  return (0.299 * r + 0.587 * g + 0.114 * b) / 255 < 0.5;
+};
+
+export default function NotesPage() {
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [touchedNote, setTouchedNote] = useState(null);
+  const tags = [...new Set(notes.flatMap((note) => note.tags))];
+
+  const filteredNotes =
+    selectedTags.length === 0
+      ? notes
+      : notes.filter((note) =>
+          selectedTags.some((tag) => note.tags.includes(tag)),
+        );
+
+  const handleNoteClick = (file) => {
+    window.open(file, "_blank");
+    setTouchedNote(null);
+  };
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+    <main>
+      <div className="title-container">
+        <div className="title-link">
+          <h1>Notes</h1>
+          <p className="title-description">
+            Notes from my B.Tech in Mechatronics Engineering
+          </p>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+
+      <FilterComponent
+        options={tags}
+        activeFilters={selectedTags}
+        onFilterChange={setSelectedTags}
+        placeholder=""
+      />
+
+      <div className="notes-grid">
+        {filteredNotes.map((note) => (
+          <div
+            key={note.title}
+            className={`book-card ${touchedNote === note.title ? "touch-active" : ""}`}
+            onClick={() => handleNoteClick(note.file)}
+            onTouchStart={() => setTouchedNote(note.title)}
+            onTouchEnd={() => setTouchedNote(null)}
+          >
+            <div
+              className="book-cover"
+              style={{
+                "--book-color": note.coverColor,
+                color: shouldUseWhiteText(note.coverColor)
+                  ? "#ffffff"
+                  : "#000000",
+              }}
+            >
+              <div
+                className="book-spine"
+                style={{ backgroundColor: note.coverColor }}
+              />
+              <div className="book-spine-edge" />
+              <div className="book-content">
+                <h3 className="book-title">{note.title}</h3>
+                <p className="book-author">{note.author}</p>
+              </div>
+              <div className="book-right-edge" />
+            </div>
+          </div>
+        ))}
+      </div>
+      <Footer />
+    </main>
   );
 }
