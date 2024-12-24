@@ -1,9 +1,11 @@
 {
   "name": "college",
+  "homepage": "https://dan10ish.github.io/college",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "deploy": "next build && touch out/.nojekyll && gh-pages -d out",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -17,6 +19,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "eslint": "^9",
-    "eslint-config-next": "15.1.2"
+    "eslint-config-next": "15.1.2",
+    "gh-pages": "^6.2.0"
   }
 }
